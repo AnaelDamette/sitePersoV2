@@ -5,34 +5,9 @@
     <i v-if="!battleLogOnScreen" class="fas fa-chevron-up"></i>
 
     <ul>
-      <li>Marina Hantz</li>
-      <li>Orinoco</li>
-      <li>Reservia</li>
-      <li>Encore Un Autre</li>
-      <li>Marina Hantz</li>
-      <li>Orinoco</li>
-      <li>Reservia</li>
-      <li>Encore Un Autre</li>
-      <li>Marina Hantz</li>
-      <li>Orinoco</li>
-      <li>Reservia</li>
-      <li>Encore Un Autre</li>
-      <li>Marina Hantz</li>
-      <li>Orinoco</li>
-      <li>Reservia</li>
-      <li>Encore Un Autre</li>
-      <li>Marina Hantz</li>
-      <li>Orinoco</li>
-      <li>Reservia</li>
-      <li>Encore Un Autre</li>
-      <li>Marina Hantz</li>
-      <li>Orinoco</li>
-      <li>Reservia</li>
-      <li>Encore Un Autre</li>
-      <li>Marina Hantz</li>
-      <li>Orinoco</li>
-      <li>Reservia</li>
-      <li>Encore Un Autre</li>
+      <li v-for="item in dataRealisation" :key="item.titre">
+        {{ item.titre }}
+      </li>
     </ul>
 
     <i v-if="battleLogOnScreen" class="fas fa-chevron-right"></i>
@@ -43,8 +18,13 @@
 
 <script>
 import { ref } from "vue";
+import realisationJson from "./realisation.json";
+
 export default {
   setup() {
+    
+    let dataRealisation = realisationJson;
+
     let battleLogOnScreen = ref(false);
     if (window.innerWidth > 767) {
       battleLogOnScreen.value = false;
@@ -58,7 +38,7 @@ export default {
         battleLogOnScreen.value = true;
       }
     });
-    return { battleLogOnScreen };
+    return { battleLogOnScreen, dataRealisation };
   },
 };
 </script>
@@ -87,6 +67,9 @@ $textColor: $primaire;
   flex-direction: row;
   @media (max-height: 768px) {
     top: 90%;
+  }
+  @media(max-height: 650) {
+    top: 80%
   }
 
   @media (min-width: 768px) {

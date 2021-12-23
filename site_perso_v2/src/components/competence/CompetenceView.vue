@@ -23,6 +23,10 @@ section {
   div {
     z-index: 5;
     display: flex;
+
+    @media (min-width: 768px) and (max-height: 600px) {
+      width: 100%;
+    }
     @media (max-width: 768px) {
       padding: 10px;
       border-radius: 1em;

@@ -119,10 +119,11 @@ export default {
 button { border: none;}
 
 .scrollSnap {
-  scroll-snap-align: start;
+  @media (min-width: 1000px) {
+  scroll-snap-align: start;}
 }
 .fullPage {
-    height: 100vh;
+   height: 100vh;
     width: 100vw;
     background-color: $primaire !important;
     overflow: hidden;

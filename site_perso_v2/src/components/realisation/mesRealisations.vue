@@ -18,7 +18,9 @@ export default {
     titreRealisations,
     mockupRealisations,
   },
-  setup() {},
+  setup() {
+    return {};
+  },
 };
 </script>
 
@@ -72,12 +74,15 @@ h2 {
   text-align: center;
   height: 80%;
 
-
   @media (min-width: 768px) {
     justify-content: space-between;
     align-items: center;
     width: 75%;
     height: auto;
+  }
+
+  @media (max-height: 700px) {
+    height: 60%;
   }
 }
 </style>

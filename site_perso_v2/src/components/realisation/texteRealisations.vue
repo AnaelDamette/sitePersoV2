@@ -1,13 +1,19 @@
 <template>
   <div class="containerTexteRealisation">
-    <p class="text">Site Web de Marina Hantz, traductrice. J'ai réalisé le site avec Vue2 ainsi que Typescript, Ie18.</p>
+    <p class="text"> {{texteRealisation}}</p>
   </div>
 </template>
 <script>
 import TextScramble from "../menu/textScramble";
-import { onMounted } from "vue";
+import { onMounted, computed } from "vue";
+import { useStore } from "vuex";
+
 export default {
   setup() {
+    const store = useStore();
+    let texteRealisation = computed(function() {
+      return store.getters["realisation/texteRealisation"]
+    })
     onMounted(() => {
       const phrases = document.querySelector(".text").textContent
 
@@ -22,6 +28,7 @@ export default {
 
       next();
     });
+    return { texteRealisation}
   },
 };
 </script>

@@ -1,9 +1,11 @@
 import { createStore } from "vuex";
 import monsterSlayerModule from './modules/monsterSlayer';
+import realisationModule from './modules/realisation';
 
 export default createStore({
   modules: {
-    monsterSlayer: monsterSlayerModule
+    monsterSlayer: monsterSlayerModule,
+    realisation: realisationModule
   },
   state() {
     return {

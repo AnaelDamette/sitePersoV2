@@ -45,11 +45,16 @@ article {
   .wrapper {
     display: flex;
     flex-direction: column;
-    @media (min-width: 769px ){
+
+    @media (min-width: 769px) {
       height: 100%;
       flex-direction: column;
-      flex-wrap:wrap;
-      justify-content:space-between;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    @media (min-width: 768px) and (max-height: 600px) {
+      flex-direction: row;
+      flex-wrap: wrap;
     }
   }
   padding: 20px;

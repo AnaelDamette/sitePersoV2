@@ -1,0 +1,32 @@
+{
+    "marinaHantz": {
+        "titre": "Marina Hantz",
+        "texte": "Réalisé avec Vue2, typescript ie18",
+        "image": "marinaHantz.png",
+        "scroll": true
+    },
+    "reservia": {
+        "titre": "Réservia",
+        "texte": "Maquette Html / Css",
+        "image":"",
+        "scroll": false
+    },
+    "sitePersoV2": {
+        "titre": "Second site perso",
+        "texte": "Vue3, Composition Api",
+        "image":"",
+        "scroll": false
+    },
+    "sitePersoV1": {
+        "titre": "Premier site perso",
+        "texte": "Vue2, BootstrapVue",
+        "image":"",
+        "scroll": false
+    },
+    "ohMyFood": {
+        "titre": "ohMyFood",
+        "texte": "Maquette Html / Scss",
+        "image":"",
+        "scroll": false
+    }
+}

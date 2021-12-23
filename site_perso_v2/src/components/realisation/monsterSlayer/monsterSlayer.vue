@@ -1,6 +1,6 @@
 <template>
   <div class="toggleMonsterSlayer" id="test">
-    <button @click="toggleMonsterSlayer">
+    <button v-if="!miniJeuDisabled" @click="toggleMonsterSlayer">
       <transition name="fade" mode="out-in">
         <i class="far fa-caret-square-left" v-if="monsterSlayerOpen"></i>
         <i class="far fa-caret-square-down" v-else></i
@@ -16,7 +16,7 @@
     <fin-de-partie class="container" v-if="winner" :winner="winner">
     </fin-de-partie>
     <action-possible id="controls" v-else> </action-possible>
-    <battle-log v-if="battleLogOnScreen" ></battle-log>
+    <battle-log v-if="battleLogOnScreen"></battle-log>
   </aside>
 </template>
 
@@ -33,7 +33,7 @@ export default {
   setup() {
     const store = useStore();
 
-    let titreMiniJeu = ref("Mini Jeu : La chasse aux Dragons")
+    let titreMiniJeu = ref("Mini Jeu : La chasse aux Dragons");
     let winner = computed(function () {
       return store.getters["monsterSlayer/winner"];
     });
@@ -47,38 +47,53 @@ export default {
 
     let monsterSlayerOpen = ref(false);
     let battleLogOnScreen = ref(false);
+    let miniJeuDisabled = ref(false);
+
     if (window.innerWidth < 650) {
       battleLogOnScreen.value = false;
     } else {
       battleLogOnScreen.value = true;
     }
     window.addEventListener("resize", () => {
+      // Si c'est width < 650 alors pas de battlelog mais si c'est inférieux à 650 width et que c'est inférieur à
       if (window.innerWidth < 650) {
-        titreMiniJeu.value = "Mini Jeu"
-        battleLogOnScreen.value = false;
+        if (window.innerHeight < 640) {
+          // miniJeuDisabled.value = true;
+          // monsterSlayerOpen.value = false;
+        } else {
+          titreMiniJeu.value = "Mini Jeu";
+          battleLogOnScreen.value = false;
+
+          miniJeuDisabled.value = false;
+        }
+        // } else if (window.innerWidth > 650 && window.innerHeight < 600) {
+        //   miniJeuDisabled.value = true;
+        //   monsterSlayerOpen.value = false;
+        // } else if (window.innerWidth > 650 && window.innerHeight < 800) {
+        //   titreMiniJeu.value = "Mini Jeu";
+        //   battleLogOnScreen.value = false;
+        //   miniJeuDisabled.value = false;
       } else {
-        
-        titreMiniJeu.value = "Mini Jeu : La chasse aux Dragons"
+        titreMiniJeu.value = "Mini Jeu : La chasse aux Dragons";
         battleLogOnScreen.value = true;
+        miniJeuDisabled.value = false;
       }
     });
     watch(JoueurHealth, function JoueurHealth(value) {
       if (JoueurHealth.value <= 10) {
-        store.dispatch("monsterSlayer/updateWinner", "egalite")
+        store.dispatch("monsterSlayer/updateWinner", "egalite");
       } else if (value < 10) {
-        store.dispatch("monsterSlayer/updateWinner", "Dragon")
+        store.dispatch("monsterSlayer/updateWinner", "Dragon");
       }
     });
     watch(DragonHealth, function DragonHealth(value) {
       if (DragonHealth.value <= 10) {
-        store.dispatch("monsterSlayer/updateWinner", "egalite")
+        store.dispatch("monsterSlayer/updateWinner", "egalite");
       } else if (value < 10) {
-        store.dispatch("monsterSlayer/updateWinner", "Joueur")
+        store.dispatch("monsterSlayer/updateWinner", "Joueur");
       }
     });
-    onMounted(() => {
-
-    });
+    onMounted(() => {});
     function toggleMonsterSlayer() {
       monsterSlayerOpen.value = !monsterSlayerOpen.value;
       return monsterSlayerOpen.value;
@@ -88,7 +103,8 @@ export default {
       monsterSlayerOpen,
       winner,
       battleLogOnScreen,
-      titreMiniJeu
+      titreMiniJeu,
+      miniJeuDisabled,
     };
   },
 };
@@ -120,7 +136,7 @@ h2 {
   margin: 0 0.8em 0 -0.8em;
   top: 3%;
   @media (max-width: 768px) {
-    top: 3%
+    top: 3%;
   }
   max-width: 400px;
   width: 60%;
